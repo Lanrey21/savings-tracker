@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Frontend Mentor | Savings Tracker</title>
+</head>
+<body>
+<div id="goal-modal" class="modal hidden">
+  <div class="modal-content">
+
+    <h2>Add New Goal</h2>
+
+    <label for="goal-name">Goal Name</label>
+    <input
+      type="text"
+      id="goal-name"
+      placeholder="e.g. New Laptop">
+
+    <label for="goal-target">Target Amount</label>
+    <input
+      type="number"
+      id="goal-target"
+      placeholder="e.g. 2500">
+
+    <label for="goal-deadline">Deadline</label>
+    <input
+      type="date"
+      id="goal-deadline">
+
+    <div class="modal-actions">
+      <button id="cancel-goal-btn">Cancel</button>
+      <button id="save-goal-btn">Save Goal</button>
+    </div>
+
+  </div>
+</div>
+  <header class="top-bar">
+    <div class="logo">
+      <h1>Savings Tracker</h1>
+    </div>
+
+    <button class="add-goal-btn">+ Add Goal</button>
+  </header>
+
+  <main class="dashboard">
+
+    <!-- Stats -->
+    <section class="stats-grid">
+
+      <div class="stat-card total">
+        <h2>Total savings</h2>
+        <p id="total-savings">$0.00</p>
+      </div>
+
+      <div class="stat-card">
+        <h2>Active goals</h2>
+        <p id="active-goals">0</p>
+      </div>
+
+      <div class="stat-card">
+        <h2>Goals completed</h2>
+        <p id="completed-goals">0</p>
+      </div>
+
+    </section>
+
+    <!-- Chart -->
+    <section class="chart-card">
+      <h2>Monthly deposits</h2>
+      <div id="chart-container">
+        Chart goes here
+      </div>
+    </section>
+
+    <!-- Goals controls -->
+    <section class="goals-toolbar">
+
+      <h2>Your goals</h2>
+
+      <div class="toolbar-controls">
+
+        <select id="filter-goals">
+          <option value="all">All Goals</option>
+          <option value="active">Active</option>
+          <option value="completed">Completed</option>
+        </select>
+
+        <select id="sort-goals">
+          <option value="alphabetical">Alphabetical</option>
+          <option value="deadline">Deadline</option>
+          <option value="progress">Progress</option>
+          <option value="saved">Amount Saved</option>
+        </select>
+
+      </div>
+
+    </section>
+
+    <!-- Goals grid -->
+    <section id="goals-container" class="goals-grid">
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
