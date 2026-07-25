@@ -91,6 +91,13 @@ select {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.10);
 }
 
 .goal-header h3 {
@@ -150,6 +157,7 @@ select {
 
 .modal-content {
   background: white;
+  color: black;
   padding: 2rem;
   border-radius: 12px;
   width: 400px;
@@ -165,3 +173,173 @@ select {
   gap: 1rem;
 }
 
+.deposit-item {
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.deposit-item p {
+    margin: 4px 0;
+}
+
+.deposit-item small {
+    color: #666;
+}
+.history-content {
+    width: 500px;
+    max-width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+
+.chart-bars {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 1rem;
+    height: 220px;
+    margin-top: 1rem;
+}
+
+.chart-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bar {
+    width: 40px;
+    background: limegreen;
+    border-radius: 8px 8px 0 0;
+    transition: height 0.5s ease, transform 0.2s ease, opacity 0.2s ease;
+    cursor: pointer;
+}
+
+.bar:hover {
+    opacity: 0.85;
+    transform: translateY(-3px);
+}
+
+.chart-bar p {
+    font-size: 0.9rem;
+}
+
+.bar-value {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+/* Add Goal */
+.add-goal-btn {
+    background: limegreen;
+    color: white;
+}
+
+/* Deposit */
+.add-deposit-btn {
+    background: #22c55e;
+    color: white;
+}
+
+.history-btn {
+    background: #6b7280;
+    color: white;
+}
+
+.edit-goal-btn {
+    background: #3b82f6;
+    color: white;
+}
+
+.delete-goal-btn {
+    background: #2d2d2d;
+    color: white;
+}
+
+.goal-card button {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease,
+                opacity 0.2s ease;
+}
+
+.goal-card button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.goal-card button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 1rem;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .goals-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .toolbar-controls {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .goals-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+
+.chart-bars {
+    gap: 0.5rem;
+}
+
+.bar {
+    width: 28px;
+}
+
+}
+
+select {
+    background: limegreen;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem;
+    cursor: pointer;
+}
+
+select:hover {
+    filter: brightness(0.95);
+}
+
+select:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}

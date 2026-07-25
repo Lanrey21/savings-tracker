@@ -6,11 +6,9 @@ async function loadGoals() {
     const savedGoals = localStorage.getItem("goals");
 
     if (savedGoals) {
-        console.log("Loading from localStorage");
 
         goals = JSON.parse(savedGoals);
     } else {
-        console.log("Loading from data.json");
 
         const response = await fetch("./data.json");
         const data = await response.json();
@@ -20,6 +18,7 @@ async function loadGoals() {
 
     applyFilterAndSort();
     updateStats();
+    renderChart();
 }
 function getSavedAmount(goal) {
     return goal.deposits.reduce((total, deposit) => {
@@ -98,6 +97,13 @@ function renderGoals(goalsToRender) {
     + Deposit
   </button>
 
+<button
+    class="history-btn"
+    data-id="${goal.id}">
+    History
+</button>
+
+
   <button
     class="delete-goal-btn"
     data-id="${goal.id}">
@@ -131,6 +137,58 @@ function updateStats() {
     const activeGoals = goals.length - completedGoals.length;
 
     activeGoalsEl.textContent = activeGoals;
+}
+
+function renderChart() {
+
+    const monthlyTotals = {};
+    goals.forEach(goal => {
+        goal.deposits.forEach(deposit => {
+            const month = new Date(deposit.createdAt).toLocaleDateString("en-US", {
+                month: "short"
+            });
+            if (!monthlyTotals[month]) {
+                monthlyTotals[month] = deposit.amount;
+            } else {
+                monthlyTotals[month] += deposit.amount;
+            }
+
+        });
+
+    });
+    const chartContainer = document.getElementById("chart-container");
+
+    chartContainer.innerHTML = "";
+
+    chartContainer.innerHTML = `<div class="chart-bars"></div>`;
+
+    const chartBars = chartContainer.querySelector(".chart-bars");
+
+    const maxAmount = Math.max(...Object.values(monthlyTotals));
+
+    for (const month in monthlyTotals) {
+
+        const amount = monthlyTotals[month];
+
+        const height = (amount / maxAmount) * 180;
+
+        const bar = `
+    <div class="chart-bar">
+
+        <div
+            class="bar"
+            title="$${amount.toLocaleString()}"
+            style="height: ${height}px;">
+        </div>
+
+        <p>${month}</p>
+
+    </div>
+`;
+
+
+        chartBars.innerHTML += bar;
+    }
 }
 
 function applyFilterAndSort() {
@@ -198,6 +256,7 @@ function applyFilterAndSort() {
 
             applyFilterAndSort();
             updateStats();
+            renderChart();
         });
     });
 
@@ -228,6 +287,7 @@ function applyFilterAndSort() {
 
             applyFilterAndSort();
             updateStats();
+            renderChart();
         });
     });
 
@@ -254,8 +314,55 @@ function applyFilterAndSort() {
             goalModal.classList.remove("hidden");
         });
     });
-}
 
+    const historyButtons = document.querySelectorAll(".history-btn");
+
+    historyButtons.forEach(button => {
+        button.addEventListener("click", () => {
+
+            const goalId = button.dataset.id;
+
+            const goal = goals.find(goal => {
+                return goal.id === goalId;
+            });
+
+            if (!goal) {
+                return;
+            }
+
+            let html = "";
+
+            if (goal.deposits.length === 0) {
+                html = "<p>No deposits yet.</p>";
+            } else {
+
+                goal.deposits.forEach(deposit => {
+
+                    html += `
+                    <div class="deposit-item">
+                        <p><strong>$${deposit.amount.toLocaleString()}</strong></p>
+                        <p>${deposit.note}</p>
+                        <small>
+                            ${new Date(deposit.createdAt).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric"
+                    })}
+                        </small>
+                    </div>
+                `;
+
+                });
+
+            }
+
+            historyList.innerHTML = html;
+
+            historyModal.classList.remove("hidden");
+
+        });
+    });
+}
 const addGoalBtn = document.querySelector(".add-goal-btn");
 
 const goalModal = document.getElementById("goal-modal");
@@ -273,6 +380,11 @@ const goalDeadlineInput = document.getElementById("goal-deadline");
 
 const saveGoalBtn = document.getElementById("save-goal-btn");
 
+const historyModal = document.getElementById("history-modal");
+
+const historyList = document.getElementById("history-list");
+
+const closeHistoryBtn = document.getElementById("close-history-btn");
 addGoalBtn.addEventListener("click", () => {
     // We're creating a new goal, not editing
     editingGoalId = null;
@@ -332,12 +444,17 @@ saveGoalBtn.addEventListener("click", () => {
 
     applyFilterAndSort();
     updateStats();
+    renderChart();
 
     goalNameInput.value = "";
     goalTargetInput.value = "";
     goalDeadlineInput.value = "";
 
     goalModal.classList.add("hidden");
+});
+
+closeHistoryBtn.addEventListener("click", () => {
+    historyModal.classList.add("hidden");
 });
 sortSelect.addEventListener("change", applyFilterAndSort);
 
