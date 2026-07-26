@@ -12,8 +12,8 @@ Built as a Frontend Mentor project using vanilla HTML, CSS, and JavaScript.
 
 ## 🔗 Links
 
-- Live Site: https://your-live-site-url.com
-- Repository: https://github.com/Lanrey21/savings-trackergit
+- Live Site: https://lanrey21.github.io/savings-tracker/
+- Repository: https://github.com/Lanrey21/savings-tracker
 
 ---
 
