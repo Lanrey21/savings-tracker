@@ -1,4 +1,4 @@
-# Personal Savings Tracker
+# 💰 Personal Savings Tracker
 
 A responsive savings tracker application that helps users create financial goals, track deposits, monitor progress, and visualize monthly savings through an interactive chart.
 
@@ -12,8 +12,10 @@ Built as a Frontend Mentor project using vanilla HTML, CSS, and JavaScript.
 
 ## 🔗 Links
 
-- Live Site: https://lanrey21.github.io/savings-tracker/
-- Repository: https://github.com/Lanrey21/savings-tracker
+## 🔗 Links
+
+- **Live Site:** https://lanrey21.github.io/savings-tracker/
+- **Repository:** https://github.com/Lanrey21/savings-tracker
 
 ---
 
@@ -60,6 +62,14 @@ Some concepts I practiced include:
 
 ---
 
+## 🧩 Challenges
+
+One of the biggest challenges during this project was keeping every part of the application synchronized after user actions.
+
+Whenever a goal was added, edited, deleted, or received a new deposit, multiple parts of the interface had to update together, including the goals list, statistics, progress bars, monthly deposits chart, and Local Storage.
+
+Building this project helped me better understand application state management and writing reusable JavaScript functions.
+
 ## ⚙️ Future Improvements
 
 Some features I'd like to add in the future include:
@@ -75,5 +85,7 @@ Some features I'd like to add in the future include:
 
 ## Author
 
-- Frontend Mentor - [@YourFrontendMentor]
-- GitHub - [@YourGitHub]
+## 👨‍💻 Author
+
+- GitHub - https://github.com/Lanrey21
+- Frontend Mentor - https://www.frontendmentor.io/profile/Lanrey21
