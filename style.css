@@ -50,7 +50,6 @@ body {
 #chart-container {
   margin-top: 1rem;
   min-height: 150px;
-  border: 1px dashed #555;
   display: flex;
   align-items: center;
   justify-content: center;
